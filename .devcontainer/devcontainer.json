@@ -1,0 +1,17 @@
+{
+	"name": "trykernel",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"eamodio.gitlens",
+				"streetsidesoftware.code-spell-checker",
+				"GitHub.copilot",
+				"GitHub.copilot-labs"
+			]
+		}
+	},
+	"remoteUser": "root"
+}
