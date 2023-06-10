@@ -4,3 +4,6 @@
 [submodule "modules/elf2uf2"]
 	path = modules/elf2uf2
 	url = https://github.com/rej696/elf2uf2.git
+[submodule "modules/pico-sdk"]
+	path = modules/pico-sdk
+	url = https://github.com/raspberrypi/pico-sdk.git
