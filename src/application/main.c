@@ -1,6 +1,4 @@
-#include "typedef.h"
-#include "sysdef.h"
-#include "syslib.h"
+#include <trykernel.h>
 
 static void delay_ms(UINT ms) {
   UINT cnt = ms/TIMER_PERIOD;
@@ -14,6 +12,10 @@ static void delay_ms(UINT ms) {
 }
 
 int main(void) {
+  tm_com_init();
+
+  tm_putstring("Hello, World!\n");
+
   while (1) {
     // P25端子(内蔵LED)の出力反転
     out_w(GPIO_OUT_XOR, (1<<25));

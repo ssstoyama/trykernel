@@ -1,7 +1,8 @@
-TARGETS := src/application/main.c \
-					 src/boot/boot2.c \
+TARGETS := src/boot/boot2.c \
 					 src/boot/reset_hdr.c \
-					 src/boot/vector_tbl.c
+					 src/boot/vector_tbl.c \
+					 src/kernel/syslib.c \
+					 src/application/main.c 
 KERNEL := build/kernel.elf
 
 .PHONY: all
