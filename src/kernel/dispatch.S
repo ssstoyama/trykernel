@@ -1,9 +1,12 @@
-    .align 2
-    .thumb_func
-    .global DispatchEntry
+.align 2
+.thumb_func
+.global DispatchEntry
 
+// コンテキスト情報を退避する。
+// DispatchEntry実行時点でマイコンの例外処理によりR0-R3,R12,LR,PC,xPSRレジスタ退避済み。
+// 残りのR4-R11レジスタの内容を退避する。
 DispatchEntry:
-  /* 1.実行中タスクのコンテキストをスタックに退避 */
+  // 1.実行中タスクのコンテキストをスタックに退避
   push    {r4-r7}
   mov     r0, r8
   mov     r1, r9
@@ -11,14 +14,15 @@ DispatchEntry:
   mov     r3, r11
   push    {r0-r3}
 
-  /* 2.実行中タスク確認 */
+  // 2.実行中タスク確認
   ldr     r0, =cur_task
   ldr     r1, [r0]
+  // 現在のタスクIDが0なら最初のディスパッチ
   cmp     r1, #0
-  /* cur_task ID=0 なら disp_010 */
+  // 現在のタスクがないためdisp_010の処理へ
   beq     disp_010
 
-  /* 3.SPレジスタの値をctx_tblに格納 */
+  // 3.SPレジスタの値をctx_tblに格納
   ldr     r0, =ctx_tbl
   sub     r1, #1
   lsl     r1, r1, #2
@@ -26,20 +30,21 @@ DispatchEntry:
   str     r2, [r0, r1]
 
 disp_010:
-  /* 4.実行中タスクの変更 */
+  // 4.実行中タスクの変更
+  // cur_task = next_task
   ldr     r0, =next_task
   ldr     r1, [r0]
   ldr     r0, =cur_task
   str     r1, [r0]
 
-  /* 5.スタックの切り替え */
+  // 5.スタック(sp)の切り替え
   ldr     r0, =ctx_tbl
   sub     r1, #1
   lsl     r1, r1, #2
   ldr     r2, [r0, r1]
   mov     sp, r2
 
-  /* 6.スタック上のコンテキストの復元 */
+  // 6.スタック上のコンテキストの復元
   pop     {r0-r3}
   mov     r11, r3
   mov     r10, r2
