@@ -9,7 +9,8 @@
 				"eamodio.gitlens",
 				"streetsidesoftware.code-spell-checker",
 				"GitHub.copilot",
-				"GitHub.copilot-labs"
+				"GitHub.copilot-labs",
+				"dan-c-underwood.arm"
 			]
 		}
 	},
