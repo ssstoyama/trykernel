@@ -2,10 +2,14 @@ SRC_DIR := src
 TARGETS := $(SRC_DIR)/boot/boot2.c \
 					 $(SRC_DIR)/boot/reset_hdr.c \
 					 $(SRC_DIR)/boot/vector_tbl.c \
-					 $(SRC_DIR)/kernel/syslib.c \
 					 $(SRC_DIR)/kernel/context.c \
 					 $(SRC_DIR)/kernel/dispatch.S \
-					 $(SRC_DIR)/application/main.c 
+					 $(SRC_DIR)/kernel/inittsk.c \
+					 $(SRC_DIR)/kernel/scheduler.c \
+					 $(SRC_DIR)/kernel/syslib.c \
+					 $(SRC_DIR)/kernel/task_manage.c \
+					 $(SRC_DIR)/kernel/task_queue.c \
+					 $(SRC_DIR)/application/usermain.c 
 KERNEL := build/kernel.elf
 
 .PHONY: all
