@@ -10,6 +10,14 @@ typedef enum {
   TS_DORMANT  = 3  // 休止状態
 } TSTAT;
 
+// タスク待ち要因
+typedef enum {
+  // 無し
+  TWFCT_NON = 0,
+  // tk_dly_tskによる時間待ち
+  TWFCT_DLY = 1,
+} TWFCT;
+
 typedef struct st_tcb {
   // コンテキストへのポインタ
   void *context;
@@ -26,6 +34,13 @@ typedef struct st_tcb {
   void *stkadr;
   // スタックサイズ
   SZ stksz;
+
+  // 待ち要因
+  TWFCT waifct;
+  // 待ち時間
+  RELTIM waitim;
+  // 待ち解除のエラーコード
+  ER *waierr;
 } TCB;
 
 // TCBテーブル
@@ -36,10 +51,15 @@ extern TCB *ready_queue[];
 extern TCB *cur_task;
 // 次に実行するタスク
 extern TCB *sche_task;
+// タスクの時間待ち行列
+extern TCB *wait_queue;
 
 // リセットハンドラ
 extern void ResetHandler(void);
+// ディスパッチャ
 extern void DispatchEntry(void);
+// システムタイマ割込みハンドラ
+extern void systimer_handler(void);
 
 // 割り込み制御ステートレジスタのアドレス
 #define SCB_ICSR 0xE000ED04

@@ -10,7 +10,8 @@
 				"streetsidesoftware.code-spell-checker",
 				"GitHub.copilot",
 				"GitHub.copilot-labs",
-				"dan-c-underwood.arm"
+				"dan-c-underwood.arm",
+				"ms-vscode.cpptools"
 			]
 		}
 	},

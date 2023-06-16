@@ -1,7 +1,4 @@
-#include "typedef.h"
-#include "sysdef.h"
-#include "syslib.h"
-#include "knldef.h"
+#include <trykernel.h>
 
 // メモリセクションのアドレス変数
 extern const void *__data_org;
@@ -167,13 +164,13 @@ static void init_section(void) {
 // システムタイマの初期化
 static void init_system(void) {
   // SysTick動作停止
-  out_w(SYST_CSR, SYST_CSR_CLKSOURCE);
+  out_w(SYST_CSR, SYST_CSR_CLKSOURCE | SYST_CSR_TICKINT);
   // リロード値設定
   out_w(SYST_RVR, (TIMER_PERIOD*TMCLK_KHz)-1);
   // カウント値設定
   out_w(SYST_CVR, (TIMER_PERIOD*TMCLK_KHz)-1);
   // SysTick動作開始
-  out_w(SYST_CSR, SYST_CSR_CLKSOURCE | SYST_CSR_ENABLE);
+  out_w(SYST_CSR, SYST_CSR_CLKSOURCE | SYST_CSR_TICKINT | SYST_CSR_ENABLE);
 }
 
 // リセットハンドラ

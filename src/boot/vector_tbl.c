@@ -15,21 +15,21 @@ void DefaultHandler(void) {
 
 void (* const vector_tbl[])() __attribute__((section(".vector"))) = {
   (void(*)()) (INITIAL_SP), // 0: スタックポインタ初期値。リセットハンドラ実行中のみ使用する。
-  ResetHandler,                        // 1: Reset
+  ResetHandler,            // 1: Reset
   DefaultHandler,          // 2: NMI
   DefaultHandler,          // 3: Hard Fault
-  0,                        // 4: 未使用
-  0,                        // 5: 未使用
-  0,                        // 6: 未使用
-  0,                        // 7: 未使用
-  0,                        // 8: 未使用
-  0,                        // 9: 未使用
-  0,                        // 10: 未使用
+  0,                       // 4: 未使用
+  0,                       // 5: 未使用
+  0,                       // 6: 未使用
+  0,                       // 7: 未使用
+  0,                       // 8: 未使用
+  0,                       // 9: 未使用
+  0,                       // 10: 未使用
   DefaultHandler,          // 11: Svcall
-  0,                        // 12: 未使用
-  0,                        // 13: 未使用
-  DispatchEntry,          // 14: PendSV
-  DefaultHandler,          // 15: Systick
+  0,                       // 12: 未使用
+  0,                       // 13: 未使用
+  DispatchEntry,           // 14: PendSV
+  systimer_handler,        // 15: Systick
   DefaultHandler,          // IRQ 0
   DefaultHandler,          // IRQ 1
   DefaultHandler,          // IRQ 2

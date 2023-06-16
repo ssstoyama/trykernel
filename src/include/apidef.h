@@ -2,6 +2,11 @@
 
 #include "typedef.h"
 
+// タイムアウト時間 0
+#define TMO_POL  (0)
+// 無限待ち
+#define TMO_FEVR (-1)
+
 // タスク生成情報
 typedef struct {
   // タスク属性
@@ -28,3 +33,6 @@ typedef struct {
 ID tk_cre_tsk(const T_CTSK *pk_ctsk);
 ER tk_sta_tsk(ID tskid, INT stacd);
 void tk_ext_tsk(void);
+
+// タスク付属同期API
+ER tk_dly_tsk(RELTIM dlytim);

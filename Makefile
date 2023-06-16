@@ -7,8 +7,10 @@ TARGETS := $(SRC_DIR)/boot/boot2.c \
 					 $(SRC_DIR)/kernel/inittsk.c \
 					 $(SRC_DIR)/kernel/scheduler.c \
 					 $(SRC_DIR)/kernel/syslib.c \
+					 $(SRC_DIR)/kernel/systimer.c \
 					 $(SRC_DIR)/kernel/task_manage.c \
 					 $(SRC_DIR)/kernel/task_queue.c \
+					 $(SRC_DIR)/kernel/task_sync.c \
 					 $(SRC_DIR)/application/usermain.c 
 KERNEL := build/kernel.elf
 
