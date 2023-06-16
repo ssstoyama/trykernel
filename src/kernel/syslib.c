@@ -22,3 +22,15 @@ UINT tm_putstring(char* str) {
   }
   return cnt;
 }
+
+// 時間待ち関数 
+void delay_ms(UINT ms) {
+  UINT cnt = ms/TIMER_PERIOD;
+
+  while(cnt) {
+    // TIMER_PERIOD経過するとフラグがセット
+    if((in_w(SYST_CSR) & SYST_CSR_COUNTFLAG)!=0) {
+      cnt--;
+    }
+  }
+}

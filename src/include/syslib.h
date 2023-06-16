@@ -52,3 +52,4 @@ static inline UW get_primask(void) {
 // デバッグ用シリアル通信
 void tm_com_init(void);
 UINT tm_putstring(char* str);
+void delay_ms(UINT ms);
