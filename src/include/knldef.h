@@ -16,6 +16,8 @@ typedef enum {
   TWFCT_NON = 0,
   // tk_dly_tskによる時間待ち
   TWFCT_DLY = 1,
+  // tk_slp_tskによる起床待ち
+  TWFCT_SLP = 2,
 } TWFCT;
 
 typedef struct st_tcb {
@@ -34,6 +36,8 @@ typedef struct st_tcb {
   void *stkadr;
   // スタックサイズ
   SZ stksz;
+  // 起床要求数
+  INT wupcnt;
 
   // 待ち要因
   TWFCT waifct;
