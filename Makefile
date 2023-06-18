@@ -4,6 +4,7 @@ TARGETS := $(SRC_DIR)/boot/boot2.c \
 					 $(SRC_DIR)/boot/vector_tbl.c \
 					 $(SRC_DIR)/kernel/context.c \
 					 $(SRC_DIR)/kernel/dispatch.S \
+					 $(SRC_DIR)/kernel/eventflag.c \
 					 $(SRC_DIR)/kernel/inittsk.c \
 					 $(SRC_DIR)/kernel/scheduler.c \
 					 $(SRC_DIR)/kernel/syslib.c \

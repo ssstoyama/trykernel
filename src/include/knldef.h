@@ -18,6 +18,8 @@ typedef enum {
   TWFCT_DLY = 1,
   // tk_slp_tskによる起床待ち
   TWFCT_SLP = 2,
+  // tk_wai_flgによるフラグ待ち
+  TWFCT_FLG = 3,
 } TWFCT;
 
 typedef struct st_tcb {
@@ -27,6 +29,7 @@ typedef struct st_tcb {
   struct st_tcb *pre;
   struct st_tcb *next;
 
+ /* タスク情報 */
   TSTAT state;
   // 実行開始アドレス
   FP tskadr;
@@ -39,12 +42,21 @@ typedef struct st_tcb {
   // 起床要求数
   INT wupcnt;
 
+  /* 時間待ち情報 */
   // 待ち要因
   TWFCT waifct;
   // 待ち時間
   RELTIM waitim;
   // 待ち解除のエラーコード
   ER *waierr;
+
+  /* イベントフラグ待ち情報 */
+  // 待ちフラグパターン
+  UINT waiptn;
+  // 待ちモード
+  UINT wfmode;
+  // 待ち解除時のフラグパターン
+  UINT *p_flgptn;
 } TCB;
 
 // TCBテーブル
@@ -80,6 +92,20 @@ extern void *make_context(UW *sp, UINT ssize, void (*fp)());
 extern void tqueue_add_entry(TCB **queue, TCB *tcb);
 extern void tqueue_remove_top(TCB **queue);
 extern void tqueue_remove_entry(TCB **queue, TCB *tcb);
+
+typedef enum {
+  // 未登録
+  KS_NONEXIST = 0,
+  // 登録済み
+  KS_EXIST    = 1,
+} KSSTAT;
+
+typedef struct st_flgcb {
+  // イベントフラグ状態
+  TSTAT state;
+  // イベントフラグ値
+  UINT flgptn;
+} FLGCB;
 
 // カーネルメイン
 extern int main(void);

@@ -29,6 +29,20 @@ typedef struct {
 #define TA_RNG2     0x0000200
 #define TA_RNG3     0x0000300
 
+/* タスクの待ち属性 */
+// 待ちタスクをFIFO順で管理
+#define TA_TFIFO 0x00000000
+// 待ちタスクを優先度順で管理
+#define TA_TPRI  0x00000001
+// 待ち行列先頭のタスクを優先
+#define TA_FIRST 0x00000000
+// 要求数の少ないタスクを優先
+#define TA_CNT   0x00000002
+// 複数タスクの待ちを許さない
+#define TA_WFGL  0x00000000
+// 複数タスクの待ちを許す
+#define TA_WMUL  0x00000008
+
 // タスク管理API
 ID tk_cre_tsk(const T_CTSK *pk_ctsk);
 ER tk_sta_tsk(ID tskid, INT stacd);
@@ -38,3 +52,25 @@ void tk_ext_tsk(void);
 ER tk_dly_tsk(RELTIM dlytim);
 ER tk_slp_tsk(TMO tmout);
 ER tk_wup_tsk(ID tskid);
+
+typedef struct t_cflg {
+  // イベントフラグ属性
+  ATR flgatr;
+  // イベントフラグ初期値
+  UINT iflgptn;
+} T_CFLG;
+
+ID tk_cre_flg(const T_CFLG *pk_cflg);
+ER tk_set_flg(ID flgid, UINT setptn);
+ER tk_clr_flg(ID flgid, UINT clrptn);
+
+// AND 待ち
+#define TWF_ANDW   0x00000000U
+// OR 待ち
+#define TWF_ORW    0x00000001U
+// 全ビットクリア
+#define TWF_CLR    0x00000010U
+// 条件ビットのみクリア
+#define TWF_BITCLR 0x00000020U
+
+ER tk_wai_flg(ID flgid, UINT waiptn, UINT wfmode, UINT *p_flgptn, TMO tmout);
