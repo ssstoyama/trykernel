@@ -7,6 +7,7 @@ TARGETS := $(SRC_DIR)/boot/boot2.o \
 					 $(SRC_DIR)/kernel/eventflag.o \
 					 $(SRC_DIR)/kernel/inittsk.o \
 					 $(SRC_DIR)/kernel/scheduler.o \
+					 $(SRC_DIR)/kernel/semaphore.o \
 					 $(SRC_DIR)/kernel/syslib.o \
 					 $(SRC_DIR)/kernel/systimer.o \
 					 $(SRC_DIR)/kernel/task_manage.o \

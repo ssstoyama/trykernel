@@ -6,3 +6,5 @@
 #define CNF_MAX_TSK_PRI  16
 // 最大イベントフラグ数
 #define CNF_MAX_FLG_ID   8
+// 最大セマフォ数
+#define CNF_MAX_SEM_ID   8

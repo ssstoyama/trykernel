@@ -74,3 +74,18 @@ ER tk_clr_flg(ID flgid, UINT clrptn);
 #define TWF_BITCLR 0x00000020U
 
 ER tk_wai_flg(ID flgid, UINT waiptn, UINT wfmode, UINT *p_flgptn, TMO tmout);
+
+/* セマフォ生成情報 */
+typedef struct t_csem {
+  // セマフォ属性
+  ATR sematr;
+  // セマフォ資源数の初期値
+  INT isemcnt;
+  // セマフォ資源数の最大値
+  INT maxsem;
+} T_CSEM;
+
+/* セマフォAPI */
+ID tk_cre_sem(const T_CSEM *pk_csem);
+ER tk_sig_sem(ID semid, INT cnt);
+ER tk_wai_sem(ID semid, INT cnt, TMO tmout);

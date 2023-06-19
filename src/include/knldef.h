@@ -20,6 +20,8 @@ typedef enum {
   TWFCT_SLP = 2,
   // tk_wai_flgによるフラグ待ち
   TWFCT_FLG = 3,
+  // tk_wai_semによるセマフォ待ち
+  TWFCT_SEM = 4,
 } TWFCT;
 
 typedef struct st_tcb {
@@ -57,6 +59,9 @@ typedef struct st_tcb {
   UINT wfmode;
   // 待ち解除時のフラグパターン
   UINT *p_flgptn;
+
+  // セマフォ資源要求数
+  INT waisem;
 } TCB;
 
 // TCBテーブル
@@ -106,6 +111,12 @@ typedef struct st_flgcb {
   // イベントフラグ値
   UINT flgptn;
 } FLGCB;
+
+typedef struct semaphore_control_block {
+  KSSTAT state;
+  INT semcnt;
+  INT maxsem;
+} SEMCB;
 
 // カーネルメイン
 extern int main(void);
